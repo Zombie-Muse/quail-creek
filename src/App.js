@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Home from './components/Home';
-import CoveyCall from './components/CoveyCall';
+import CoveyCall from './components/CoveyCall/CoveyCall';
 import About from './components/About';
 import NeighborhoodWatch from './components/NeighborhoodWatch';
 import Community from './components/Community';
@@ -15,8 +15,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navigation />
         <Container>
+          <Navigation />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/covey-call" exact element={<CoveyCall />} />
