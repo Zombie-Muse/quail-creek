@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import CoveyCall from './components/CoveyCall/CoveyCall';
 import About from './components/About';
@@ -14,21 +13,21 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Container>
-          <Navigation />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/covey-call" exact element={<CoveyCall />} />
-            <Route path="/about" exact element={<About />} />
-            <Route path="/neighborhood-watch" element={<NeighborhoodWatch />} />
-            <Route path="/community" element={<Community />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/documents" element={<Documents />} />
-          </Routes>
-          <Footer />
-        </Container>
-      </Router>
+      <Navigation />
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/covey-call" element={<CoveyCall />} />
+        <Route exact path="/about" element={<About />} />
+        <Route
+          exact
+          path="/neighborhood-watch"
+          element={<NeighborhoodWatch />}
+        />
+        <Route exact path="/community" element={<Community />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/documents" element={<Documents />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
