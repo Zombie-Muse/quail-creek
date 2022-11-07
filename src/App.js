@@ -6,14 +6,17 @@ import NeighborhoodWatch from './components/NeighborhoodWatch';
 import Community from './components/Community';
 import Contact from './components/Contact';
 import Documents from './components/Documents';
-import Navigation from './components/Navigation';
+import Faq from './components/Faq';
+import Navigation from './components/navigation/NavBar';
 import Footer from './components/Footer';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Navigation />
+      <header>
+        <Navigation />
+      </header>
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/covey-call" element={<CoveyCall />} />
@@ -26,6 +29,7 @@ function App() {
         <Route exact path="/community" element={<Community />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/documents" element={<Documents />} />
+        <Route exact path="/faq" element={<Faq />} />
       </Routes>
       <Footer />
     </div>

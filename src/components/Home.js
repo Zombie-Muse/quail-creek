@@ -4,7 +4,7 @@ import CustomButton from './CustomButton';
 
 const Home = () => {
   return (
-    <div className="main-container">
+    <div className="container mx-auto ">
       {/* <style type="text/css">
         {`
                 .btn-qc {
