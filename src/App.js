@@ -7,7 +7,7 @@ import Community from './components/Community';
 import Contact from './components/Contact';
 import Documents from './components/Documents';
 import Faq from './components/Faq';
-import Navigation from './components/navigation/NavBar';
+import Navigation from './components/navigation/Navbar2';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -31,7 +31,7 @@ function App() {
         <Route exact path="/documents" element={<Documents />} />
         <Route exact path="/faq" element={<Faq />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -7,7 +7,8 @@ const NavigationLinks = () => {
     { name: 'Covey Call', submenu: false, link: '/covey-call' },
     {
       name: 'Community',
-      submenu: true,
+      submenu: false,
+      link: '/community',
       sublinks: [
         { name: 'Neighborhood Watch', link: '/neighborhood-watch' },
         { name: 'Bulletin Board', link: '/' },
@@ -16,7 +17,6 @@ const NavigationLinks = () => {
       ],
     },
     { name: 'Contact', submenu: false, link: '/contact' },
-    { name: 'FAQ', submenu: false, link: '/faq' },
   ];
 
   return (
@@ -24,7 +24,12 @@ const NavigationLinks = () => {
       {links.map((Link) => (
         <div>
           <div className="px-3 text-left md:cursor-pointer">
-            <NavLink to={Link.link}>{Link.name}</NavLink>
+            <NavLink
+              to={Link.link}
+              className="md:cursor-pointer hover:bg-gray-200 tracking-wide p-8 float-right md:w-auto hidden border-none md:block flex outline-0"
+            >
+              {Link.name}
+            </NavLink>
             {Link.submenu && (
               <div className="absolute top-20 p-3.5">
                 <div className="bg-white">
