@@ -7,6 +7,8 @@ import Community from './Community';
 import Contact from './Contact';
 import Documents from './Documents';
 import Faq from './Faq';
+import Login from './Login';
+import { AuthProvider } from '../context/AuthContext';
 
 const Routing = () => {
   return (
@@ -24,6 +26,7 @@ const Routing = () => {
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/documents" element={<Documents />} />
         <Route exact path="/faq" element={<Faq />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

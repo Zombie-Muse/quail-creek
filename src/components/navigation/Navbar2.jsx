@@ -3,9 +3,11 @@ import { NavLink } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import qcLogo from '../../assets/qcLogo.png';
 import NavigationLinks from './NavigationLinks';
+import { useAuth } from '../../context/AuthContext';
 // import NavigationLinks from './NavigationLinks';
 
 const Navigation = () => {
+  const currentUser = useAuth();
   const [open, setOpen] = useState(false);
 
   return (
@@ -54,6 +56,14 @@ const Navigation = () => {
             {open ? <FiX /> : <FiMenu />}
           </div>
         </div>
+        {currentUser ? (
+          <p>hello {currentUser.email}</p>
+        ) : (
+          <div>
+            <p>Wtf are you?</p>
+            <NavLink to={'/login'}>Login</NavLink>
+          </div>
+        )}
         <NavigationLinks />
         {console.log(open)}
       </nav>
