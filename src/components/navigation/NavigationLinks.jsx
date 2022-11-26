@@ -3,48 +3,27 @@ import { NavLink } from 'react-router-dom';
 
 const NavigationLinks = () => {
   const links = [
-    { name: 'About', submenu: false, link: '/about' },
-    { name: 'Covey Call', submenu: false, link: '/covey-call' },
-    {
-      name: 'Community',
-      submenu: false,
-      link: '/community',
-      sublinks: [
-        { name: 'Neighborhood Watch', link: '/neighborhood-watch' },
-        { name: 'Bulletin Board', link: '/' },
-        { name: 'Forms', link: '/' },
-        { name: 'Calendar', link: '/' },
-      ],
-    },
-    { name: 'Contact', submenu: false, link: '/contact' },
+    { name: 'Contact', link: '/contact' },
+    { name: 'Community', link: '/community' },
+    { name: 'Covey Call', link: '/covey-call' },
+    { name: 'About', link: '/about' },
   ];
 
   return (
-    <>
-      {links.map((Link) => (
-        <div>
-          <div className="px-3 text-left md:cursor-pointer">
-            <NavLink
-              to={Link.link}
-              className="md:cursor-pointer hover:bg-gray-200 tracking-wide p-8 float-right md:w-auto hidden border-none md:block flex outline-0"
-            >
-              {Link.name}
-            </NavLink>
-            {Link.submenu && (
-              <div className="absolute top-20 p-3.5">
-                <div className="bg-white">
-                  <li className="text-sm text-gray-600 my-2.5">
-                    {Link.sublinks.map((subs) => (
-                      <NavLink to={subs.link}>{subs.name}</NavLink>
-                    ))}
-                  </li>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+    <ul className="text-center sm:-my-8 pb-8 items-center sm:flex sm:justify-end">
+      {links.map((link, i) => (
+        <li className="py-3 px-4" key={i}>
+          <NavLink
+            key={i}
+            to={link.link}
+            className="rounded text-gray-900 hover:text-black justify-center"
+            // className="border-none justify-center hover:font-semibold text-slate-800 hover:text-black"
+          >
+            {link.name}
+          </NavLink>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 
