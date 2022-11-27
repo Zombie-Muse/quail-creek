@@ -1,4 +1,4 @@
-import db from '../Firebase';
+import db from '../firebase';
 import { useState, useEffect } from 'react';
 
 const Community = () => {
@@ -24,13 +24,11 @@ const Community = () => {
 
   return (
     <div>
-      <p>Here is the Community. You are impressed.</p>
-      {console.log(data)}
+      <p>Here is the Community. You are impressed!</p>
       {loading === false &&
         data.map((stuff) => (
           <div key={stuff}>
             <h1>{stuff.title}</h1>
-            {/* <p>{stuff.date}</p> */}
             <p>{stuff.body}</p>
           </div>
         ))}

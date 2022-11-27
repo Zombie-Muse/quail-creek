@@ -56,14 +56,7 @@ const Navigation = () => {
             {open ? <FiX /> : <FiMenu />}
           </div>
         </div>
-        {currentUser ? (
-          <p>hello {currentUser.email}</p>
-        ) : (
-          <div>
-            <p>Wtf are you?</p>
-            <NavLink to={'/login'}>Login</NavLink>
-          </div>
-        )}
+
         <NavigationLinks />
         {console.log(open)}
       </nav>
