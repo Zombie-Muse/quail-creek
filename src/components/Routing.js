@@ -4,7 +4,7 @@ import Home from './Home';
 import CoveyCall from './CoveyCall/CoveyCall';
 import About from './About';
 import NeighborhoodWatch from './NeighborhoodWatch';
-import Community from './Community';
+import Community from './Community/Community';
 import Contact from './Contact';
 import Documents from './Documents';
 import Faq from './Faq';

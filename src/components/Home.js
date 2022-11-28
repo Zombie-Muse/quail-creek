@@ -1,6 +1,3 @@
-import { ButtonGroup } from 'react-bootstrap';
-import CustomButton from './CustomButton';
-
 const Home = () => {
   return (
     <div className="mx-[10%]">
@@ -124,9 +121,6 @@ const Home = () => {
           viverra ipsum nunc. Velit scelerisque in dictum non consectetur.
         </p>
       </div>
-      <ButtonGroup onClick={() => alert('FUCK!!!')}>
-        <CustomButton label="?" />
-      </ButtonGroup>
     </div>
   );
 };
