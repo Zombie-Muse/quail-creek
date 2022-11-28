@@ -69,7 +69,7 @@ export default function Login() {
             <button
               type="submit"
               className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
-              onSubmit={handleFormSubmit}
+              onSubmit={handleFormSubmit()}
               disabled={loading}
             >
               Login

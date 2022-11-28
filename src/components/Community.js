@@ -1,19 +1,21 @@
-import db from '../firebase';
+import {db} from '../firebase';
+import {collection, getDocs, onSnapshot} from 'firebase/firestore'
 import { useState, useEffect } from 'react';
 
 const Community = () => {
-  const ref = db.collection('updates');
+  // const ref = db.collection('updates');
+  const ref = getDocs(collection(db, "updates"))
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+//TODO fix this shit
   async function getData() {
-    await ref.onSnapshot((querySnapshot) => {
+    const docItems = await onSnapshot(ref, (querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
-      setData(items);
+      setData(docItems);
       setLoading(false);
     });
   }
