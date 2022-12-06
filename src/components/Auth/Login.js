@@ -17,6 +17,7 @@ export default function Login() {
 
   async function handleFormSubmit(e) {
     e.preventDefault();
+    console.log(email, password);
 
     try {
       setLoading(true);
@@ -28,6 +29,7 @@ export default function Login() {
     }
 
     setLoading(false);
+    console.log(`Current User is: ${currentUser}`);
   }
 
   return (
@@ -38,11 +40,12 @@ export default function Login() {
             Login to your account
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <input
                 id="email-address"
+                value={email}
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -55,6 +58,7 @@ export default function Login() {
             <div>
               <input
                 id="password"
+                value={password}
                 name="password"
                 type="password"
                 autoComplete="current-password"
@@ -69,7 +73,6 @@ export default function Login() {
             <button
               type="submit"
               className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
-              onSubmit={handleFormSubmit}
               disabled={loading}
             >
               Login

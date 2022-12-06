@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import qcLogo from '../../assets/qcLogo.png';
 import NavigationLinks from './NavigationLinks';
@@ -7,8 +7,26 @@ import { useAuth } from '../../context/AuthContext';
 // import NavigationLinks from './NavigationLinks';
 
 const Navigation = () => {
-  const currentUser = useAuth();
+  const { currentUser, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser != null) {
+      navigate('/');
+    }
+  }, [currentUser]);
+
+  async function buttonSubmit(e) {
+    e.preventDefault();
+
+    try {
+      await logout();
+      navigate('/');
+    } catch (e) {
+      alert('Failed to logout');
+    }
+  }
 
   return (
     <>
@@ -59,6 +77,7 @@ const Navigation = () => {
 
         <NavigationLinks />
         {console.log(open)}
+        <button onClick={buttonSubmit}>Logout</button>
       </nav>
     </>
   );

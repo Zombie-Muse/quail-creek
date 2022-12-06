@@ -2,10 +2,13 @@ import { db } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import moment from 'moment';
+import { useAuth } from '../../context/AuthContext';
 
 const Community = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     getUpdates();
@@ -43,6 +46,7 @@ const Community = () => {
       <h1 className="text-2xl font-bold p-10">
         Here is the Community. You are impressed!
       </h1>
+      {/* <p>Current User: {currentUser}</p> */}
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 place-content-center">
         {loading === false &&
           data.map((update) => (
