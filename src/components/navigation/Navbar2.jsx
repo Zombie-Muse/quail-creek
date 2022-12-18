@@ -7,15 +7,11 @@ import Logout from '../Auth/Logout';
 // import NavigationLinks from './NavigationLinks';
 
 const Navigation = () => {
-  // TODO: Why is this like this? if open = true then the X should be showing in the menu
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
-      <nav
-        className="block md:flex md:flex-row justify-between p-6 shadow-md bg-gray-500 md:bg-gray-200"
-        // className="flex items-center justify-between bg-gray-200 px-20 py-10 shadow-md"
-      >
+      <nav className="md:flex md:flex-row justify-between p-5 shadow-md bg-gray-500 md:bg-gray-200">
         <div className="flex items-center justify-between py-0 ">
           <NavLink to={'/'}>
             <div className="flex items-center justify-center">
@@ -55,16 +51,15 @@ const Navigation = () => {
           <div
             className="flex justify-end px-3 -my-4 rounded text-gray-900 hover:text-black cursor-pointer md:hidden text-xl"
             onClick={() => {
-              // TODO: This seems backwards right now. Maybe I'm just tired, but if it's open then it should console.log open and the X should be visible.
               setOpen(!open);
-              open ? console.log('open') : console.log('closed');
             }}
           >
-            {/* TODO: I have this backwards because it doesn't work correctly the other way around. If open = true then it should show FiX and not the menu. */}
-            {open ? <FiMenu /> : <FiX />}
+            {open ? <FiX /> : <FiMenu />}
           </div>
         </div>
-        <NavigationLinks />
+        <div className={`${open ? 'block transition-all' : 'hidden md:flex'}`}>
+          <NavigationLinks />
+        </div>
       </nav>
     </>
   );

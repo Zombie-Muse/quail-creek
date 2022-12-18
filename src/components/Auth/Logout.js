@@ -27,18 +27,29 @@ const Logout = () => {
   if (currentUser) {
     return (
       <div className="border justify-start items-start rounded cursor-auto">
-        <p>{currentUser ? <p>{currentUser.email}</p> : <p>no user</p>}</p>
-        <button
-          className="border rounded cursor-pointer"
-          onClick={buttonSubmit}
-        >
-          Logout
-        </button>
+        {/* {currentUser ? <span>{currentUser.email}</span> : <span></span>} */}
+        {currentUser ? (
+          <button
+            className="border rounded cursor-pointer"
+            onClick={buttonSubmit}
+          >
+            {currentUser.email}
+          </button>
+        ) : (
+          <button>?</button>
+        )}
+        {/* <button */}
+        {/* className="border rounded cursor-pointer" */}
+        {/* onClick={buttonSubmit} */}
+        {/* > */}
+        {/* Logout */}
+        {/* </button> */}
       </div>
     );
-  } else {
-    return <div>none</div>;
   }
+  // else {
+  // return <div>none</div>;
+  // }
 };
 
 export default Logout;
