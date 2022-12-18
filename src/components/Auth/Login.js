@@ -6,7 +6,8 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { currentUser, login } = useAuth();
+  const [error, setError] = useState('');
+  const { currentUser, login, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,19 +18,18 @@ export default function Login() {
 
   async function handleFormSubmit(e) {
     e.preventDefault();
-    console.log(email, password);
 
     try {
       setLoading(true);
       await login(email, password);
       navigate('/community');
     } catch (e) {
-      alert('Failed to login');
-      console.log('What happened?');
+      setError(e);
+      alert('Something messed up...');
+      console.log(error);
     }
 
     setLoading(false);
-    console.log(`Current User is: ${currentUser}`);
   }
 
   return (
@@ -86,6 +86,16 @@ export default function Login() {
               >
                 Don't have an account? Register
               </Link>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="text-sm">
+                <button
+                  onClick={() => signInWithGoogle()}
+                  className="text-blue-600 hover:underline dark:text-blue-500"
+                >
+                  Sign-in with Google
+                </button>
+              </div>
             </div>
           </div>
         </form>

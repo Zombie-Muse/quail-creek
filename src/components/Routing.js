@@ -8,9 +8,10 @@ import Community from './Community/Community';
 import Contact from './Contact';
 import Documents from './Documents';
 import Faq from './Faq';
-import AuthContextProvider, { AuthProvider } from '../context/AuthContext';
+// import AuthContextProvider, { AuthProvider } from '../context/AuthContext';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
+import PostUpdate from './Community/PostUpdate';
 
 const Routing = () => {
   return (
@@ -31,6 +32,7 @@ const Routing = () => {
         <Route exact path="/faq" element={<Faq />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/post-update" element={<PostUpdate />} />
       </Routes>
     </div>
   );

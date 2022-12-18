@@ -8,6 +8,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { currentUser, register } = useAuth();
 
@@ -20,8 +21,6 @@ export default function Register() {
   async function handleFormSubmit(e) {
     e.preventDefault();
 
-    console.log(email, password);
-
     if (password !== confirmPassword) {
       return alert('Passwords do not match');
     }
@@ -29,87 +28,86 @@ export default function Register() {
     try {
       setLoading(true);
       await register(email, password);
-      console.log(currentUser);
-      navigate('/community');
+      navigate('/');
     } catch (e) {
+      setError(e);
       alert('Failed to register');
+      console.log(error);
     }
     setLoading(false);
   }
 
   return (
-    <AuthContextProvider>
-      <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <div>
-            <h2 className="mt-4 text-3xl text-center tracking-tight font-light dark:text-white">
-              Register your account
-            </h2>
-          </div>
-          <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
-            <div className="rounded-md shadow-sm -space-y-px">
-              <div>
-                <input
-                  id="email-address"
-                  value={email}
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div>
-                <input
-                  id="password"
-                  value={password}
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div>
-                <input
-                  id="confirmPassword"
-                  value={confirmPassword}
-                  name="confirmPassword"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Password"
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
+    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-4 text-3xl text-center tracking-tight font-light dark:text-white">
+            Register your account
+          </h2>
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <input
+                id="email-address"
+                value={email}
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div>
-              <button
-                type="submit"
-                className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
-                disabled={loading}
+              <input
+                id="password"
+                value={password}
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                id="confirmPassword"
+                value={confirmPassword}
+                name="confirmPassword"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
+              disabled={loading}
+            >
+              Register
+            </button>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm">
+              <Link
+                to="/login"
+                className="text-blue-600 hover:underline dark:text-blue-500"
               >
-                Register
-              </button>
+                Already have an account? Login
+              </Link>
             </div>
-            <div className="flex items-center justify-between">
-              <div className="text-sm">
-                <Link
-                  to="/login"
-                  className="text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Already have an account? Login
-                </Link>
-              </div>
-            </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-    </AuthContextProvider>
+    </div>
   );
 }
