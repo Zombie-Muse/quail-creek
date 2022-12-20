@@ -39,6 +39,7 @@ const Community = () => {
                 </h1>
 
                 <p className="text-sm pb-6 pt-0">
+                  {/* {update.data.date} */}
                   {moment
                     .utc(update.data.date.toDate().toString())
                     .format('LL')}

@@ -97,6 +97,16 @@ const Navigation = () => {
                 Contact
               </NavLink>
             </li>
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/post-update'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Updates
+                </NavLink>
+              </li>
+            )}
             {!currentUser && (
               <li className="py-3 px-4">
                 <NavLink
