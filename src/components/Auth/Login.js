@@ -22,7 +22,7 @@ export default function Login() {
     try {
       setLoading(true);
       await login(email, password);
-      navigate('/community');
+      navigate('/');
     } catch (e) {
       setError(e);
       alert('Something messed up...');
@@ -30,6 +30,18 @@ export default function Login() {
     }
 
     setLoading(false);
+  }
+
+  async function handleGoogleClick() {
+    try {
+      setLoading(true);
+      await signInWithGoogle();
+      navigate('/');
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+      console.log(error);
+    }
   }
 
   return (
@@ -78,27 +90,27 @@ export default function Login() {
               Login
             </button>
           </div>
+        </form>
+        <div className="flex items-center justify-between">
+          <div className="text-sm">
+            <Link
+              to="/register"
+              className="text-blue-600 hover:underline dark:text-blue-500"
+            >
+              Don't have an account? Register
+            </Link>
+          </div>
           <div className="flex items-center justify-between">
             <div className="text-sm">
-              <Link
-                to="/register"
+              <button
+                onClick={() => handleGoogleClick()}
                 className="text-blue-600 hover:underline dark:text-blue-500"
               >
-                Don't have an account? Register
-              </Link>
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="text-sm">
-                <button
-                  onClick={() => signInWithGoogle()}
-                  className="text-blue-600 hover:underline dark:text-blue-500"
-                >
-                  Sign-in with Google
-                </button>
-              </div>
+                Sign-in with Google
+              </button>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

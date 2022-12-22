@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
-import { currentUser, logout } from '../../context/AuthContext';
-
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+
 const Logout = () => {
   const { currentUser, logout } = useAuth();
-
   const navigate = useNavigate();
+
   useEffect(() => {
     if (currentUser) {
       navigate('/');
@@ -33,23 +32,16 @@ const Logout = () => {
             className="border rounded cursor-pointer"
             onClick={buttonSubmit}
           >
-            {currentUser.email}
+            {currentUser.displayName
+              ? currentUser.displayName
+              : currentUser.email}
           </button>
         ) : (
           <button>?</button>
         )}
-        {/* <button */}
-        {/* className="border rounded cursor-pointer" */}
-        {/* onClick={buttonSubmit} */}
-        {/* > */}
-        {/* Logout */}
-        {/* </button> */}
       </div>
     );
   }
-  // else {
-  // return <div>none</div>;
-  // }
 };
 
 export default Logout;
