@@ -1,47 +1,136 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import CommunityDropdown from './CommunityDropdown';
 import { FiMenu, FiX } from 'react-icons/fi';
-import qcLogo from '../../assets/qcLogo.png';
-import NavigationLinks from './NavigationLinks';
+import Logout from '../Auth/Logout';
+import { useAuth } from '../../context/AuthContext';
+import Logo from './Logo';
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
 
   return (
-    <nav className="bg-gray-100">
-      <div className="flex items-center font-medium justify-around">
-        <div className="z-50 p-5 md:w-auto w-full flex justify-between">
-          <img src={qcLogo} alt="logo" className="md:cursor-pointer h-20" />
-          <div className="text-3xl" onClick={() => setOpen(!open)}>
-            <ion-icon
-              name={`${open ? 'close-outline' : 'menu-outline'}`}
-            ></ion-icon>
+    <>
+      <nav className="md:flex md:flex-row justify-between p-5 shadow-md bg-gray-50 md:bg-gray-50">
+        <div className="flex items-center justify-between py-0 ">
+          <NavLink to={'/'}>
+            <div className="flex items-center justify-center">
+              <Logo/>
+              {/* <svg
+                id="logo-15"
+                width="49"
+                height="48"
+                viewBox="0 0 49 48"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {' '}
+                <path
+                  d="M24.5 12.75C24.5 18.9632 19.4632 24 13.25 24H2V12.75C2 6.53679 7.03679 1.5 13.25 1.5C19.4632 1.5 24.5 6.53679 24.5 12.75Z"
+                  className="ccustom"
+                  fill="#17CF97"
+                ></path>{' '}
+                <path
+                  d="M24.5 35.25C24.5 29.0368 29.5368 24 35.75 24H47V35.25C47 41.4632 41.9632 46.5 35.75 46.5C29.5368 46.5 24.5 41.4632 24.5 35.25Z"
+                  className="ccustom"
+                  fill="#17CF97"
+                ></path>{' '}
+                <path
+                  d="M2 35.25C2 41.4632 7.03679 46.5 13.25 46.5H24.5V35.25C24.5 29.0368 19.4632 24 13.25 24C7.03679 24 2 29.0368 2 35.25Z"
+                  className="ccustom"
+                  fill="#17CF97"
+                ></path>{' '}
+                <path
+                  d="M47 12.75C47 6.53679 41.9632 1.5 35.75 1.5H24.5V12.75C24.5 18.9632 29.5368 24 35.75 24C41.9632 24 47 18.9632 47 12.75Z"
+                  className="ccustom"
+                  fill="#17CF97"
+                ></path>{' '}
+              </svg> */}
+            </div>
+          </NavLink>
+          <div
+            className="flex justify-end px-3 -my-4 rounded text-gray-900 hover:text-black cursor-pointer md:hidden text-xl"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            {open ? <FiX /> : <FiMenu />}
           </div>
         </div>
-        <ul className="md:flex hidden uppercase items-center gap-8 ">
-          <li className="py-3 px-4">
-            <NavLink to="/" className="py-7 px-3 inline-block">
-              Home
-            </NavLink>
-          </li>
-          <NavigationLinks />
-        </ul>
-        {/*--------------------- MOBILE NAV --------------------*/}
-        <ul
-          className={`md:hidden bg-white absolute w-full h-full bottom-0 py-24 pl-4 duration-500 ${
-            open ? 'left-0' : 'left-[-100%]'
-          }`}
-        >
-          <li>
-            <NavLink to="/" className="py-7 px-3 inline-block">
-              Home
-            </NavLink>
-            <NavigationLinks />
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <div className={`${open ? 'block transition-all' : 'hidden md:flex'}`}>
+          {/* <NavigationLinks currentUser={currentUser} /> */}
+          <ul className="text-center uppercase font-bold md:-my-8  items-center md:flex md:justify-end">
+            <li className="py-3 px-4">
+              <NavLink
+                to={'/about'}
+                className="rounded text-slate-800 hover:text-green-600 justify-center"
+              >
+                About
+              </NavLink>
+            </li>
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/covey-call'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Covey Call
+                </NavLink>
+              </li>
+            )}
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/community'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Community
+                </NavLink>
+              </li>
+            )}
+            <li className="py-3 px-4">
+              <NavLink
+                to={'/contact'}
+                className="rounded text-slate-800 hover:text-green-600 justify-center"
+              >
+                Contact
+              </NavLink>
+            </li>
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/post-update'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Updates
+                </NavLink>
+              </li>
+            )}
+            {!currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/login'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Login
+                </NavLink>
+              </li>
+            )}
+            {currentUser && (
+              <li className="py-3 px-4">
+                <Logout />
+                {/* <NavLink
+                  to={'/logout'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Logout
+                </NavLink> */}
+              </li>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 };
 
