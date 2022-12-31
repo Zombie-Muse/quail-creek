@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import AuthContextProvider, { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
+import { db } from '../../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Register() {
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [unitNumber, setUnitNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [permissions, setPermissions] = useState('');
+  const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [firstName, setFirstName] = useState('')
@@ -17,6 +25,7 @@ export default function Register() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { currentUser, register } = useAuth();
+  const userCollectionRef = collection(db, 'users');
 
   useEffect(() => {
     if (currentUser && currentUser == !null) {
@@ -24,8 +33,24 @@ export default function Register() {
     }
   }, [currentUser, navigate]);
 
-  async function addNewUser(){
-
+  async function addUser(
+    firstName,
+    lastName,
+    unitNumber,
+    email,
+    phoneNumber,
+    permissions,
+    role
+  ) {
+    addDoc(userCollectionRef, {
+      firstName: firstName,
+      lastName: lastName,
+      unitNumber: unitNumber,
+      email: email,
+      phoneNumber: phoneNumber,
+      permissions: permissions,
+      role: role,
+    });
   }
   async function handleFormSubmit(e) {
     e.preventDefault();
@@ -37,7 +62,16 @@ export default function Register() {
     try {
       setLoading(true);
       await register(email, password);
-      await addNewUser()
+
+      await addUser(
+        firstName,
+        lastName,
+        unitNumber,
+        email,
+        phoneNumber,
+        permissions,
+        role
+      );
       navigate('/');
     } catch (e) {
       setError(e);
@@ -68,6 +102,87 @@ export default function Register() {
                 className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                id="first-name"
+                value={firstName}
+                name="firstName"
+                type="text"
+                autoComplete="first-name"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="First Name"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                id="last-name"
+                value={lastName}
+                name="lastName"
+                type="text"
+                autoComplete="last-name"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Last Name"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                id="unit-number"
+                value={unitNumber}
+                name="unitNumber"
+                type="text"
+                autoComplete=""
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Unit Number"
+                onChange={(e) => setUnitNumber(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <input
+                id="phone-number"
+                value={phoneNumber}
+                name="phoneNumber"
+                type="phone"
+                autoComplete=""
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Phone Number"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <input
+                id="permissions"
+                value={permissions}
+                name="permissions"
+                type="text"
+                autoComplete=""
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="permissions"
+                onChange={(e) => setPermissions(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <input
+                id="role"
+                value={role}
+                name="role"
+                type="text"
+                autoComplete=""
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="role"
+                onChange={(e) => setRole(e.target.value)}
               />
             </div>
             <div>
