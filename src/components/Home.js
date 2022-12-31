@@ -1,26 +1,16 @@
 import { useAuth } from '../context/AuthContext';
 import Community from './Community/Community';
+import MainCarousel from './MainCarousel';
 
 const Home = () => {
   const { currentUser } = useAuth();
 
   return (
-    <div className="mx-[10%]">
-      <h1 className="text-2xl font-bold p-10">Home page</h1>
-      <p>
-        {currentUser
-          ? `Welcome, ${
-              currentUser.displayName
-                ? currentUser.displayName
-                : currentUser.email
-            }`
-          : `${''}`}
-      </p>
-      <p>Photos go here? Maybe?</p>
-      <p className="justify-start items-start">
-        {/* {JSON.stringify(currentUser, null, 2)} */}
-      </p>
-      <Community />
+    <div className="-z-20 bg-gray-300 justify-center m-0 ">
+      <MainCarousel />
+      <div className="max-w-screen-lg justify-center rounded-lg p-8 bg-gray-100 ">
+        <Community />
+      </div>
     </div>
   );
 };
