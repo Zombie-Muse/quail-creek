@@ -1,14 +1,14 @@
-import { useAuth } from '../context/AuthContext';
 import Community from './Community/Community';
 import MainCarousel from './MainCarousel';
+import Welcome from './Welcome';
 
 const Home = () => {
-  const { currentUser } = useAuth();
-
   return (
-    <div className="-z-20 bg-gray-300 justify-center m-0 ">
+    <div className=" -z-20 bg-gray-300 m-0 ">
       <MainCarousel />
-      <div className="max-w-screen-lg justify-center rounded-lg p-8 bg-gray-100 ">
+
+      <div className="m-auto my-10 max-w-screen-lg rounded-lg p-8 bg-gray-100 ">
+        <Welcome />
         <Community />
       </div>
     </div>
