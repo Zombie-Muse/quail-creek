@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 // import qcLogo from '../../assets/qcLogo.png';
-import NavigationLinks from './NavigationLinks';
 import Logout from '../Auth/Logout';
 // import NavigationLinks from './NavigationLinks';
 import { useAuth } from '../../context/AuthContext';

@@ -12,7 +12,7 @@ const Home = () => {
           ? `Welcome, ${
               currentUser.displayName
                 ? currentUser.displayName
-                : currentUser.email
+                : currentUser.uid
             }`
           : `${''}`}
       </p>
