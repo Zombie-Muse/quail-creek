@@ -1,47 +1,106 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import CommunityDropdown from './CommunityDropdown';
 import { FiMenu, FiX } from 'react-icons/fi';
-import qcLogo from '../../assets/qcLogo.png';
-import NavigationLinks from './NavigationLinks';
+import Logout from '../Auth/Logout';
+import { useAuth } from '../../context/AuthContext';
+import Logo from './Logo';
 
 const Navigation = () => {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useAuth();
 
   return (
-    <nav className="bg-gray-100">
-      <div className="flex items-center font-medium justify-around">
-        <div className="z-50 p-5 md:w-auto w-full flex justify-between">
-          <img src={qcLogo} alt="logo" className="md:cursor-pointer h-20" />
-          <div className="text-3xl" onClick={() => setOpen(!open)}>
-            <ion-icon
-              name={`${open ? 'close-outline' : 'menu-outline'}`}
-            ></ion-icon>
+    <>
+      <nav className="md:flex md:flex-row justify-between p-5 shadow-md bg-gray-50 md:bg-gray-50">
+        <div className="flex items-center justify-between py-0 ">
+          <NavLink to={'/'}>
+            <div className="flex items-center justify-center">
+              <Logo />
+            </div>
+          </NavLink>
+          <div
+            className="flex justify-end px-3 -my-4 rounded text-gray-900 hover:text-black cursor-pointer md:hidden text-xl"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            {open ? <FiX /> : <FiMenu />}
           </div>
         </div>
-        <ul className="md:flex hidden uppercase items-center gap-8 ">
-          <li className="py-3 px-4">
-            <NavLink to="/" className="py-7 px-3 inline-block">
-              Home
-            </NavLink>
-          </li>
-          <NavigationLinks />
-        </ul>
-        {/*--------------------- MOBILE NAV --------------------*/}
-        <ul
-          className={`md:hidden bg-white absolute w-full h-full bottom-0 py-24 pl-4 duration-500 ${
-            open ? 'left-0' : 'left-[-100%]'
-          }`}
-        >
-          <li>
-            <NavLink to="/" className="py-7 px-3 inline-block">
-              Home
-            </NavLink>
-            <NavigationLinks />
-          </li>
-        </ul>
-      </div>
-    </nav>
+        <div className={`${open ? 'block transition-all' : 'hidden md:flex'}`}>
+          {/* <NavigationLinks currentUser={currentUser} /> */}
+          <ul className="text-center uppercase font-bold md:-my-8  items-center md:flex md:justify-end">
+            <li className="py-3 px-4">
+              <NavLink
+                to={'/about'}
+                className="rounded text-slate-800 hover:text-green-600 justify-center"
+              >
+                About
+              </NavLink>
+            </li>
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/covey-call'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Covey Call
+                </NavLink>
+              </li>
+            )}
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/community'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Community
+                </NavLink>
+              </li>
+            )}
+            <li className="py-3 px-4">
+              <NavLink
+                to={'/contact'}
+                className="rounded text-slate-800 hover:text-green-600 justify-center"
+              >
+                Contact
+              </NavLink>
+            </li>
+            {currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/post-update'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Updates
+                </NavLink>
+              </li>
+            )}
+            {!currentUser && (
+              <li className="py-3 px-4">
+                <NavLink
+                  to={'/login'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Login
+                </NavLink>
+              </li>
+            )}
+            {currentUser && (
+              <li className="py-3 px-4">
+                <Logout />
+                {/* <NavLink
+                  to={'/logout'}
+                  className="rounded text-slate-800 hover:text-green-600 justify-center"
+                >
+                  Logout
+                </NavLink> */}
+              </li>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </>
   );
 };
 

@@ -15,6 +15,12 @@ export default function Register() {
   const [role, setRole] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [permissions, setPermissions] = useState('')
+  const [role, setRole] = useState('')
+  const [unitNumber, setUnitNumber] = useState('')
+  const [authId, setAuthId] = useState('')
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -56,6 +62,7 @@ export default function Register() {
     try {
       setLoading(true);
       await register(email, password);
+
       await addUser(
         firstName,
         lastName,
