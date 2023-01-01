@@ -1,6 +1,13 @@
 import React from 'react';
+import { useState } from 'react';
 
 const NewsletterSignup = () => {
+  const [checked, setChecked] = useState(false);
+
+  function handleCheckbox() {
+    setChecked(!checked);
+    console.log('checkbox toggled');
+  }
   return (
     <div className="p-6 rounded-lg shadow-lg max-w-sm my-10 mx-auto bg-gray-500">
       <h2 className="text-gray-900 font-semibold text-xl mb-6">
@@ -54,11 +61,11 @@ const NewsletterSignup = () => {
             type="checkbox"
             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain mr-2 cursor-pointer"
             id="exampleCheck96"
-            checked
+            onChange={handleCheckbox}
           />
           <label
             className="form-check-label inline-block text-gray-800"
-            for="exampleCheck96"
+            htmlFor="exampleCheck96"
           >
             I have read and agree to the terms
           </label>
