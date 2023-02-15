@@ -1,10 +1,9 @@
-
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import CoveyCall from './CoveyCall/CoveyCall';
 import About from './About';
 import NeighborhoodWatch from './NeighborhoodWatch';
-import Community from './Community/Community';
+import CommunityNews from './Community/CommunityNews';
 import Contact from './Contact';
 import Documents from './Documents';
 import Faq from './Faq';
@@ -28,7 +27,7 @@ const Routing = () => {
             path="/neighborhood-watch"
             element={<NeighborhoodWatch />}
           />
-          <Route element={<Community />} path="/community" exact />
+          <Route element={<CommunityNews />} path="/community" exact />
           <Route exact path="/documents" element={<Documents />} />
           <Route path="/post-update" element={<PostUpdate />} />
         </Route>
